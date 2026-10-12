@@ -1,0 +1,9 @@
+{
+  "regions": ["icn1"],
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": "node_modules/pdfjs-dist/legacy/build/**",
+      "excludeFiles": "{node_modules/@huggingface,node_modules/@hyzyla,node_modules/@img,node_modules/onnxruntime-node,node_modules/onnxruntime-web,node_modules/sharp}/**"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "evalso-mcp",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Schoolinfo assessment-plan MCP for Korean teachers",
+  "bin": { "evalso-mcp": "dist/index.js" },
+  "files": ["dist", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.3.1",
+    "iconv-lite": "^0.6.3",
+    "kordoc": "3.3.0",
+    "pdfjs-dist": "^4.10.38",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.1",
+    "@types/node": "^22.14.0",
+    "typescript": "~5.8.3"
+  },
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/reallygood83/evalso-mcp.git" }
+}
