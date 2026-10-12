@@ -33,8 +33,13 @@ test('설치형 Node stdio 실행 파일에서 MCP 도구 네 개가 보인다',
   const client = new Client({ name: 'install-test', version: '1.0.0' });
   await client.connect(new StdioClientTransport({ command: process.execPath, args: ['dist/index.js'], cwd: process.cwd() }));
   try {
-    assert.deepEqual((await client.listTools()).tools.map((tool) => tool.name),
+    const tools = (await client.listTools()).tools;
+    assert.deepEqual(tools.map((tool) => tool.name),
       ['find_school', 'list_plan_documents', 'read_plan_text', 'prepare_comment_guidance']);
+    assert.match(client.getInstructions() ?? '', /학교알리미.*평가계획/);
+    assert.match(client.getInstructions() ?? '', /find_school.*list_plan_documents.*read_plan_text.*prepare_comment_guidance/s);
+    assert.ok(tools.every((tool, index) => tool.description?.includes(`${index + 1}/4`)));
+    assert.match(tools[3].description, /문장을 생성하지 않습니다/);
   } finally { await client.close(); }
 });
 
