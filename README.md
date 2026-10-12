@@ -6,11 +6,11 @@
 
 [![Grok Bot 설치 시작 버튼](https://img.shields.io/badge/Grok%20Bot-Install%20Evalso%20MCP-a6f4f5?style=for-the-badge&labelColor=171717)](https://reallygood83.github.io/evalso-mcp/)
 
-버튼을 누르면 **설치 요청 문구를 복사하고 Grok Bot을 여는 안내 화면**으로 이동합니다. 실제 플러그인 등록은 Bot에서 승인하거나 아래 명령을 설정 화면에 입력해야 합니다. 자동 설치를 약속하는 버튼은 아닙니다.
+버튼을 누르면 **설치 요청 문구를 복사하고 Grok Bot 소개·다운로드 페이지를 여는 안내 화면**으로 이동합니다. 이미 앱이 있다면 Bot 대화창에 붙여넣으세요. Bot에게 **Node.js·Git 확인, 누락 시 공식 사이트 설치 안내, 버전 재확인, MCP 등록**을 순서대로 요청합니다. 실제 플러그인 등록은 Bot에서 승인하거나 아래 명령을 설정 화면에 입력해야 합니다. 자동 설치를 약속하는 버튼은 아닙니다.
 
 ## 1. 설치 전 준비
 
-1. 인터넷에 연결된 컴퓨터에 [Node.js](https://nodejs.org/ko/download) **20 이상**을 설치합니다. 이미 설치했다면 건너뜁니다. 설치 후 터미널(Windows는 PowerShell)에서 `node -v`와 `npx -v`를 입력해 버전이 보이는지 확인합니다.
+1. 인터넷에 연결된 컴퓨터에 [Node.js](https://nodejs.org/ko/download) **20 이상**을 설치합니다. 새로 설치한다면 현재 **LTS**를 고르세요. 이미 설치했다면 건너뜁니다. 설치 후 터미널(Windows는 PowerShell)에서 `node -v`와 `npx -v`를 입력해 버전이 보이는지 확인합니다.
 2. [Git](https://git-scm.com/downloads)을 설치하고 `git --version`으로 확인합니다. 아래 명령은 GitHub 저장소에서 프로그램을 내려받으므로 Git이 필요합니다.
 3. [Codex](https://developers.openai.com/codex/cli) 또는 [Claude Code](https://code.claude.com/docs/en/overview) 중 **하나**를 설치하고 해당 서비스에 로그인합니다. 터미널에서 `codex --version` 또는 `claude --version`으로 확인합니다. 일반 ChatGPT·Claude 웹 채팅창에 아래 설치 명령을 붙여넣는 방식은 아닙니다.
 4. 별도의 `EVALSO_MCP_TOKEN`이나 Upstage API 키는 필요 없습니다. 다만 Codex·Claude 등 **AI 도우미 자체의 이용 권한**은 필요합니다.
@@ -71,7 +71,7 @@ Codex/Claude Code를 닫았다가 다시 엽니다. `codex mcp list` 또는 `cla
 
 Grok Bot의 사용자/팀 Bot은 **Custom MCP server**를 연결할 수 있습니다. 실행 환경에 따라 다음 중 하나를 고릅니다. 플러그인 추가 화면은 버전에 따라 다를 수 있으며, 실제 Grok Bot 화면에서 Evalso 연결에 성공했는지는 아직 검증하지 않았습니다.
 
-먼저 위 **Grok Bot 설치 시작** 버튼을 눌러 요청 문구를 복사하고 Bot에 붙여넣으세요. Bot이 직접 설정을 바꿀 수 없다면 아래 명령을 등록합니다.
+먼저 위 **Grok Bot 설치 시작** 버튼을 눌러 요청 문구를 복사하고 **설치된 Bot 앱의 대화창**에 붙여넣으세요. Bot이 명령 실행 컴퓨터에 Node.js와 Git이 있는지 확인하고, 빠져 있다면 운영체제에 맞는 공식 설치 단계를 안내하도록 요청합니다. 그 컴퓨터에 접근할 수 없는 Bot이라면 실제로 설치됐다고 판단하지 마세요. Bot이 직접 플러그인 설정을 바꿀 수 없다면 아래 명령을 등록합니다.
 
 **방법 A: Command (해당 컴퓨터에서 사용)**
 

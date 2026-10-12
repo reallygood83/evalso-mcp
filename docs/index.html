@@ -43,25 +43,26 @@
   <header><div class="inner"><a class="brand" href="./"><span>E</span>Evalso MCP</a><a href="https://github.com/reallygood83/evalso-mcp">GitHub 사용 안내</a></div></header>
   <main class="inner">
     <h1>Grok Bot에 Evalso 연결하기</h1>
-    <p class="lead">학교 이름으로 평가계획을 찾아 평어 초안을 만드는 도구입니다. 아래 버튼은 <strong>설치 요청 문구를 복사하고 Grok Bot을 엽니다.</strong> Bot에서 문구를 붙여넣고 필요한 설치 승인을 해야 합니다.</p>
+    <p class="lead">학교 이름으로 평가계획을 찾아 평어 초안을 만드는 도구입니다. 버튼을 누르면 <strong>설치 요청 문구를 복사하고 Grok Bot 소개·다운로드 페이지를 엽니다.</strong> 이미 앱을 사용 중이라면 Bot 대화창에 문구를 붙여넣으세요.</p>
     <div class="action">
-      <button id="start" type="button" class="primary">설치 요청 복사하고 Grok Bot 열기</button>
-      <a class="button secondary" href="https://x.ai/bot" target="_blank" rel="noopener noreferrer">Grok Bot만 열기</a>
+      <button id="start" type="button" class="primary">설치 요청 복사 · Grok Bot 안내 열기</button>
+      <a class="button secondary" href="https://x.ai/bot" target="_blank" rel="noopener noreferrer">Grok Bot 다운로드 안내</a>
     </div>
     <p class="status" id="status" role="status" aria-live="polite"></p>
     <p class="note">이 버튼이 MCP를 자동 설치하지는 않습니다. Grok Bot이 설치를 지원하지 않는다면 아래 명령을 플러그인 설정에 직접 입력하세요.</p>
 
     <hr class="divider">
-    <h2>붙여넣은 뒤 이렇게 진행하세요</h2>
+    <h2>Bot이 설치 준비부터 안내합니다</h2>
     <ol>
-      <li>Grok Bot에서 요청 문구를 붙여넣고 전송합니다. 명령 실행이나 플러그인 추가 승인을 요구하면 내용을 확인한 뒤 승인합니다.</li>
-      <li>Bot이 직접 플러그인을 추가할 수 없다면 <strong>Plugins → Custom MCP server → Command</strong>에 명령 <code>npx</code>, 인자 <code>--yes github:reallygood83/evalso-mcp</code>를 넣습니다.</li>
+      <li>설치된 Grok Bot 앱의 대화창에 요청 문구를 붙여넣습니다. Bot이 명령 실행 환경에서 <code>node -v</code>, <code>npx -v</code>, <code>git --version</code>을 확인하도록 요청합니다.</li>
+      <li>빠진 프로그램이 있으면 Bot에게 운영체제에 맞는 공식 설치 페이지와 순서를 안내받습니다. 설치 후 새 터미널에서 버전을 다시 확인합니다. Bot이 명령을 직접 실행하지 못하면 교사가 확인 결과를 알려줍니다.</li>
+      <li>준비가 끝나면 Bot에서 MCP 등록을 요청합니다. 직접 추가할 수 없다면 <strong>Plugins → Custom MCP server → Command</strong>에 명령 <code>npx</code>, 인자 <code>--yes github:reallygood83/evalso-mcp</code>를 넣습니다.</li>
       <li>연결 후 <code>evalso로 평촌초등학교를 검색해줘</code>라고 말해 학교 후보가 표시되는지 확인합니다.</li>
     </ol>
-    <p>Bot이 명령을 실행하는 컴퓨터에는 Node.js 20 이상, Git, 인터넷 연결이 필요합니다. 이 Command 방식에는 <code>EVALSO_MCP_TOKEN</code>이 필요하지 않습니다.</p>
+    <p>확인할 곳은 교사의 휴대전화가 아니라 <strong>Bot이 MCP 명령을 실행할 컴퓨터</strong>입니다. Node.js 최소 20 이상과 Git, 인터넷 연결이 필요합니다. 새로 설치한다면 Node.js의 현재 LTS를 권합니다. 이 Command 방식에는 <code>EVALSO_MCP_TOKEN</code>이 필요하지 않습니다.</p>
 
     <label for="prompt">설치 요청 문구</label>
-    <textarea id="prompt" readonly>내 Grok Bot에 Evalso MCP를 연결해줘. 먼저 이 대화가 사용하는 컴퓨터에서 Node.js 20 이상과 Git, npx를 쓸 수 있는지 확인해줘. 가능하면 Custom MCP server의 Command 방식으로 이름 evalso, 명령 npx, 인자 --yes github:reallygood83/evalso-mcp 를 등록해줘. 설치나 명령 실행에 승인이 필요하면 먼저 내게 물어봐. 네가 플러그인을 직접 추가할 수 없다면 내가 설정 화면에서 할 정확한 단계를 안내해줘. 연결 후 evalso 도구 목록을 확인하고 평촌초등학교 검색만 시험해줘. 학생 개인정보나 성취 수준은 아직 입력하지 않을게.</textarea>
+    <textarea id="prompt" readonly>내 Grok Bot에 Evalso MCP를 연결하도록 설치 준비부터 단계별로 도와줘. 먼저 내 휴대전화나 노트북이라고 가정하지 말고, 이 Bot의 MCP Command가 실행되는 컴퓨터의 운영체제와 node -v, npx -v, git --version을 확인해줘. 직접 확인할 수 없다면 어떤 컴퓨터에서 확인해야 하는지와 버전 확인 방법을 먼저 물어봐. Node.js가 없거나 20 미만이면 https://nodejs.org/ko/download 에서 현재 LTS를, Git이 없으면 https://git-scm.com/downloads 에서 내 운영체제에 맞는 버전을 설치하도록 화면 기준으로 한 단계씩 안내해줘. 설치 후 터미널을 다시 열고 버전을 재확인해줘. 실행 환경에 접근할 수 없다면 되는 척하지 말고 이유를 알려줘. 준비되면 나에게 설치·플러그인 추가 승인을 먼저 요청하고, Custom MCP server의 Command 방식으로 이름 evalso, 명령 npx, 인자 --yes github:reallygood83/evalso-mcp 를 등록해줘. 직접 등록할 수 없다면 내게 Plugins 설정 화면에서 할 일을 순서대로 알려줘. 마지막으로 evalso 도구 목록과 평촌초등학교 검색만 시험해줘. 학생 개인정보나 성취 수준은 입력하지 않을게.</textarea>
     <div class="action"><button id="copy" type="button" class="secondary">요청 문구 복사</button></div>
     <p class="note">학생 이름·학번은 입력하지 마세요. 평가계획을 읽은 뒤 학년·학기·과목과 실제 성취기준을 확인하고, 학생별 관찰 내용에 맞춰 초안을 검토합니다. <a href="https://github.com/reallygood83/evalso-mcp#readme">전체 사용 설명서</a></p>
   </main>
@@ -72,7 +73,7 @@
     async function copyPrompt() {
       try {
         await navigator.clipboard.writeText(promptField.value);
-        status.textContent = '요청 문구를 복사했습니다. Grok Bot 대화에 붙여넣으세요.';
+        status.textContent = '요청 문구를 복사했습니다. 설치된 Grok Bot 앱의 대화창에 붙여넣으세요.';
       } catch {
         promptField.focus();
         promptField.select();
