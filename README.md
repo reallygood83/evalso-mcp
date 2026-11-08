@@ -11,7 +11,7 @@
 ## 1. 설치 전 준비
 
 1. 인터넷에 연결된 컴퓨터에 [Node.js](https://nodejs.org/ko/download) **20 이상**을 설치합니다. 새로 설치한다면 현재 **LTS**를 고르세요. 이미 설치했다면 건너뜁니다. 설치 후 터미널(Windows는 PowerShell)에서 `node -v`와 `npx -v`를 입력해 버전이 보이는지 확인합니다.
-2. [Git](https://git-scm.com/downloads)을 설치하고 `git --version`으로 확인합니다. 아래 명령은 GitHub 저장소에서 프로그램을 내려받으므로 Git이 필요합니다.
+2. npm 설치 명령에는 Git이 필요 없습니다. 소스 코드를 직접 내려받는 대체 설치에만 [Git](https://git-scm.com/downloads)이 필요합니다.
 3. [Codex](https://developers.openai.com/codex/cli) 또는 [Claude Code](https://code.claude.com/docs/en/overview) 중 **하나**를 설치하고 해당 서비스에 로그인합니다. 터미널에서 `codex --version` 또는 `claude --version`으로 확인합니다. 일반 ChatGPT·Claude 웹 채팅창에 아래 설치 명령을 붙여넣는 방식은 아닙니다.
 4. 별도의 `EVALSO_MCP_TOKEN`이나 Upstage API 키는 필요 없습니다. 다만 Codex·Claude 등 **AI 도우미 자체의 이용 권한**은 필요합니다.
 
@@ -22,16 +22,16 @@
 **Codex 사용자**
 
 ```bash
-codex mcp add evalso -- npx --yes github:reallygood83/evalso-mcp
+codex mcp add evalso -- npx --yes evalso-mcp@0.1.0
 ```
 
 **Claude Code 사용자**
 
 ```bash
-claude mcp add --scope user evalso -- npx --yes github:reallygood83/evalso-mcp
+claude mcp add --scope user evalso -- npx --yes evalso-mcp@0.1.0
 ```
 
-Codex/Claude Code를 닫았다가 다시 엽니다. `codex mcp list` 또는 `claude mcp list`에서 `evalso`가 보이는지 확인하세요. 처음 사용할 때는 GitHub에서 필요한 프로그램을 설치하므로 잠시 걸릴 수 있습니다. **GitHub의 `npx` 설치 명령으로 도구 목록 조회까지 테스트했습니다.**
+Codex/Claude Code를 닫았다가 다시 엽니다. `codex mcp list` 또는 `claude mcp list`에서 `evalso`가 보이는지 확인하세요. 처음 사용할 때는 npm에서 필요한 프로그램을 설치하므로 잠시 걸릴 수 있습니다. 일반 사용자는 npm 계정이나 `npm login`이 필요 없습니다.
 
 설치가 잘됐는지 AI 도우미에 다음처럼 말해보세요.
 
@@ -41,7 +41,13 @@ Codex/Claude Code를 닫았다가 다시 엽니다. `codex mcp list` 또는 `cla
 
 ### Hermes Agent 사용자
 
-Node.js 20 이상과 Git, 설치 및 모델 로그인을 마친 Hermes Agent가 필요합니다. **일부 Hermes 환경은 보안을 위해 자식 프로세스의 npm Git 패키지 설치를 차단합니다.** 이 환경에서 `npx github:...`를 바로 등록하면 `EALLOWGIT` 또는 `Connection closed`가 발생할 수 있습니다. 보안 설정을 해제하지 말고, 터미널에서 이 저장소를 직접 내려받아 설치한 뒤 로컬 실행 파일을 연결하세요.
+Node.js 20 이상과 설치 및 모델 로그인을 마친 Hermes Agent가 필요합니다. **활성 프로필**에서 다음 한 줄을 실행합니다. 첫 다운로드를 기다릴 수 있도록 연결 제한 시간을 180초로 지정합니다.
+
+```bash
+hermes mcp add evalso --connect-timeout 180 --command npx --args --yes evalso-mcp@0.1.0
+```
+
+일부 Hermes 환경은 보안을 위해 npm의 Git 패키지 설치를 차단합니다. `npx github:...` 대신 위 npm 레지스트리 명령을 사용하고 보안 설정은 해제하지 마세요. npm 설치가 어려운 환경에서는 터미널에서 저장소를 직접 내려받아 로컬 실행 파일을 연결할 수 있습니다.
 
 ```bash
 git clone https://github.com/reallygood83/evalso-mcp.git
@@ -62,7 +68,7 @@ hermes mcp add evalso --command node --args "/절대/경로/evalso-mcp/dist/inde
 
 Evalso용 Upstage 키나 운영자 토큰은 필요 없습니다. 평어는 Hermes에 연결된 모델이 작성하므로 **해당 모델의 이용 권한과 비용**은 별도입니다. 학교알리미 접속은 Hermes가 실행되는 컴퓨터에서 이뤄져 해외 서버나 제한된 네트워크에서는 실패할 수 있습니다. 시간 초과만으로 해외 접속 차단이라고 단정하지 마세요.
 
-**npm 배포 상태:** 아직 npm 공개 게시 전입니다. `npx evalso-mcp` 대신 위 로컬 설치를 사용하세요. npm 인증 및 실제 게시 확인 후 npm용 한 줄 명령으로 안내를 갱신합니다.
+설치 패키지: [`evalso-mcp` on npm](https://www.npmjs.com/package/evalso-mcp). 명령은 재현 가능한 설치를 위해 버전 `0.1.0`으로 고정했습니다.
 
 ## 3. 평가계획 찾기
 
