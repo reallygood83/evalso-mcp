@@ -2,11 +2,11 @@
 
 학교 이름으로 학교알리미의 **교과별 평가계획**을 찾아 읽고, 교사가 확인한 성취기준과 학생의 실제 학습 모습을 바탕으로 교과 평어·세특 **초안**을 작성할 때 쓰는 도구입니다. MCP는 Codex나 Claude Code 같은 AI 도우미에 평가계획 조회 기능을 연결합니다. 평어 문장 자체는 연결한 AI 도우미가 쓰고, 교사가 사실관계와 기재 기준을 최종 검토합니다.
 
-**가장 쉬운 방법:** 내 컴퓨터의 Codex 또는 Claude Code에 설치합니다. Evalso 키나 학교알리미 API 키가 필요 없습니다. **Grok Bot**은 실행하는 컴퓨터에서 Command 방식으로 연결하거나, 팀 공유용으로 HTTPS 서버를 배포할 수 있습니다. 아직 누구나 접속할 수 있는 Evalso 공용 MCP 주소는 제공하지 않습니다.
+**가장 쉬운 방법:** 내 컴퓨터의 Codex, Claude Code 또는 Hermes Agent에 npm으로 설치합니다. Evalso 키나 학교알리미 API 키가 필요 없습니다. **Grok Bot**은 로컬 stdio MCP 실행을 지원하는 환경에서만 연결할 수 있으며 봇별 실제 연결은 검증하지 않았습니다. 팀 공유용 HTTPS 서버를 직접 배포할 수도 있지만, 누구나 접속할 수 있는 Evalso 공용 MCP 주소는 아직 제공하지 않습니다.
 
-[![Grok Bot 설치 시작 버튼](https://img.shields.io/badge/Grok%20Bot-Install%20Evalso%20MCP-a6f4f5?style=for-the-badge&labelColor=171717)](https://reallygood83.github.io/evalso-mcp/)
+[**설치 안내 페이지 열기: Codex · Claude Code · Hermes**](https://reallygood83.github.io/evalso-mcp/)
 
-버튼을 누르면 **설치 요청 문구를 복사하고 Grok Bot 소개·다운로드 페이지를 여는 안내 화면**으로 이동합니다. 이미 앱이 있다면 Bot 대화창에 붙여넣으세요. Bot에게 **Node.js·Git 확인, 누락 시 공식 사이트 설치 안내, 버전 재확인, MCP 등록**을 순서대로 요청합니다. 실제 플러그인 등록은 Bot에서 승인하거나 아래 명령을 설정 화면에 입력해야 합니다. 자동 설치를 약속하는 버튼은 아닙니다.
+설치 준비, 도우미별 npm 연결 명령, 연결 확인, 학교 검색과 성취기준 조합 예시를 한 페이지에서 확인할 수 있습니다. 명령 복사 버튼은 설치를 자동 실행하지 않습니다. AI 도우미 자체의 로그인과 모델 이용 권한은 별도로 필요합니다.
 
 ## 1. 설치 전 준비
 
