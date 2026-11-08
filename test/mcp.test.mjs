@@ -43,6 +43,24 @@ test('설치형 Node stdio 실행 파일에서 MCP 도구 네 개가 보인다',
   } finally { await client.close(); }
 });
 
+test('파서의 일반 로그가 MCP 표준 출력을 오염시키지 않는다', async () => {
+  const client = new Client({ name: 'stdout-test', version: '1.0.0' });
+  const entry = new URL('../dist/index.js', import.meta.url).href;
+  const preload = `import ${JSON.stringify(entry)}; console.log('parser-log'); console.info('parser-info'); console.debug('parser-debug');`;
+  const transport = new StdioClientTransport({ command: process.execPath,
+    args: ['--import', `data:text/javascript,${encodeURIComponent(preload)}`, 'dist/index.js'],
+    cwd: process.cwd(), stderr: 'pipe' });
+  let logs = '';
+  transport.stderr?.on('data', (chunk) => { logs += chunk.toString(); });
+  try {
+    await client.connect(transport);
+    assert.equal((await client.listTools()).tools.length, 4);
+    assert.match(logs, /parser-log/);
+    assert.match(logs, /parser-info/);
+    assert.match(logs, /parser-debug/);
+  } finally { await client.close(); }
+});
+
 test('학기 캐시를 분리하고 원문에 없는 기준을 거부한다', async () => {
   const { deps, calls } = data();
   const server = createRemoteEvalsoServer(deps);
