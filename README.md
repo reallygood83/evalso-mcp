@@ -41,10 +41,19 @@ Codex/Claude Code를 닫았다가 다시 엽니다. `codex mcp list` 또는 `cla
 
 ### Hermes Agent 사용자
 
-현재는 GitHub 설치 방식으로 연결할 수 있습니다. Node.js 20 이상과 Git, 설치 및 모델 로그인을 마친 Hermes Agent가 필요합니다. **활성 프로필**에서 다음 한 줄을 실행합니다.
+Node.js 20 이상과 Git, 설치 및 모델 로그인을 마친 Hermes Agent가 필요합니다. **일부 Hermes 환경은 보안을 위해 자식 프로세스의 npm Git 패키지 설치를 차단합니다.** 이 환경에서 `npx github:...`를 바로 등록하면 `EALLOWGIT` 또는 `Connection closed`가 발생할 수 있습니다. 보안 설정을 해제하지 말고, 터미널에서 이 저장소를 직접 내려받아 설치한 뒤 로컬 실행 파일을 연결하세요.
 
 ```bash
-hermes mcp add evalso --command npx --args --yes github:reallygood83/evalso-mcp
+git clone https://github.com/reallygood83/evalso-mcp.git
+cd evalso-mcp
+npm ci --omit=optional
+npm run build
+```
+
+설치 폴더의 절대 경로를 확인한 뒤, 아래 `/절대/경로`를 본인의 경로로 바꿔 **활성 프로필**에 연결합니다. 경로에 공백이 있으면 따옴표를 유지하세요.
+
+```bash
+hermes mcp add evalso --command node --args "/절대/경로/evalso-mcp/dist/index.js"
 ```
 
 도구 4개가 나타나면 `Enable all 4 tools?`에 `y`를 입력합니다. 새 대화를 열거나 기존 대화에서 `/reload-mcp`를 실행합니다. `hermes mcp list`로 등록 상태를 확인할 수 있습니다. 다른 프로필은 별도 등록이 필요합니다.
@@ -53,7 +62,7 @@ hermes mcp add evalso --command npx --args --yes github:reallygood83/evalso-mcp
 
 Evalso용 Upstage 키나 운영자 토큰은 필요 없습니다. 평어는 Hermes에 연결된 모델이 작성하므로 **해당 모델의 이용 권한과 비용**은 별도입니다. 학교알리미 접속은 Hermes가 실행되는 컴퓨터에서 이뤄져 해외 서버나 제한된 네트워크에서는 실패할 수 있습니다. 시간 초과만으로 해외 접속 차단이라고 단정하지 마세요.
 
-**npm 배포 상태:** 아직 npm 공개 게시 전입니다. `npx evalso-mcp`가 아닌 위 GitHub 명령을 사용하세요. npm 인증 및 실제 게시 확인 후 npm용 한 줄 명령으로 안내를 갱신합니다.
+**npm 배포 상태:** 아직 npm 공개 게시 전입니다. `npx evalso-mcp` 대신 위 로컬 설치를 사용하세요. npm 인증 및 실제 게시 확인 후 npm용 한 줄 명령으로 안내를 갱신합니다.
 
 ## 3. 평가계획 찾기
 
