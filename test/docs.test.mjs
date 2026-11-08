@@ -7,6 +7,21 @@ const html = readFileSync(new URL('docs/index.html', root), 'utf8');
 const pkg = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'));
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json" id="structured-data">([\s\S]*?)<\/script>/)[1]);
 
+test('public lookup FAQs match JSON-LD exactly and describe actual limits', () => {
+  const faq = schema['@graph'].find(item => item['@type'] === 'FAQPage');
+  assert.equal(faq.mainEntity.length, 3);
+  const details = [...html.matchAll(/<details id="faq-[^"]+"><summary>(.*?)<\/summary><p>(.*?)<\/p><\/details>/g)];
+  for (const question of faq.mainEntity) {
+    const visible = details.find(([, heading]) => heading === question.name);
+    assert.ok(visible, question.name);
+    assert.equal(question.acceptedAnswer.text, visible[2]);
+  }
+  const answers = faq.mainEntity.map(q => q.acceptedAnswer.text).join('\n');
+  for (const fact of ['Open API 인증키', '공개 웹사이트', '접속 제한', '사이트 구조 변경', '8,000자', '12,000자', '16건·30분', '학교·목록 재조회']) assert.ok(answers.includes(fact));
+  const guide = schema['@graph'].find(item => item['@type'] === 'TechArticle');
+  assert.equal(guide.hasPart['@id'], faq['@id']);
+});
+
 test('creator channels use the verified profiles, local logos and safe new tabs', () => {
   const footer = html.match(/<footer[\s\S]*?<\/footer>/)[0];
   const links = [
