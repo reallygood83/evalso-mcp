@@ -4,7 +4,7 @@
 
 **가장 쉬운 방법:** 내 컴퓨터의 Codex, Claude Code 또는 Hermes Agent에 npm으로 설치합니다. Evalso 키나 학교알리미 API 키가 필요 없습니다. **Grok Bot**은 로컬 stdio MCP 실행을 지원하는 환경에서만 연결할 수 있으며 봇별 실제 연결은 검증하지 않았습니다. 팀 공유용 HTTPS 서버를 직접 배포할 수도 있지만, 누구나 접속할 수 있는 Evalso 공용 MCP 주소는 아직 제공하지 않습니다.
 
-[**설치 안내 페이지 열기: Codex · Claude Code · Hermes**](https://reallygood83.github.io/evalso-mcp/)
+[**설치 안내 페이지 열기: Codex · Claude Code · Hermes**](https://evalso-mcp-guide.vercel.app/)
 
 설치 준비, 도우미별 npm 연결 명령, 연결 확인, 학교 검색과 성취기준 조합 예시를 한 페이지에서 확인할 수 있습니다. 명령 복사 버튼은 설치를 자동 실행하지 않습니다. AI 도우미 자체의 로그인과 모델 이용 권한은 별도로 필요합니다.
 

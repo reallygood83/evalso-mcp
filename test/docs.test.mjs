@@ -34,11 +34,25 @@ test('installation metadata describes the visible guide and published version', 
   assert.ok(html.includes(`<time datetime="${guide.dateModified}">`));
   assert.match(guide.dateModified, /T\d{2}:\d{2}:\d{2}\+09:00$/);
   assert.ok(html.includes(`>${guide.author.name}</a>`));
-  assert.ok(html.includes(`src="${guide.image.split('/evalso-mcp/')[1]}"`));
+  assert.ok(html.includes(`src="${new URL(guide.image).pathname.slice(1)}"`));
   for (const section of guide.articleSection) assert.ok(html.includes(`<h2>${section}</h2>`));
   assert.equal(new Set(graph.map(item => item['@id'])).size, graph.length);
   assert.ok(!graph.some(item => ['Review', 'Product', 'SoftwareApplication'].includes(item['@type'])));
   assert.ok(!html.includes('aggregateRating'));
+});
+
+test('Vercel canonical, social metadata and sitemap use the production origin', () => {
+  const origin = 'https://evalso-mcp-guide.vercel.app/';
+  assert.ok(html.includes(`<link rel="canonical" href="${origin}">`));
+  assert.ok(html.includes(`<meta property="og:url" content="${origin}">`));
+  assert.ok(!html.includes('reallygood83.github.io/evalso-mcp'));
+  for (const item of schema['@graph']) assert.ok(item['@id'].startsWith(origin));
+  assert.ok(readFileSync(new URL('docs/sitemap.xml', root), 'utf8').includes(`<loc>${origin}</loc>`));
+  assert.ok(readFileSync(new URL('docs/robots.txt', root), 'utf8').includes(`${origin}sitemap.xml`));
+  const config = JSON.parse(readFileSync(new URL('docs/vercel.json', root), 'utf8'));
+  assert.equal(config.framework, null);
+  assert.equal(config.outputDirectory, '.');
+  assert.equal(config.installCommand, '');
 });
 
 test('every client has a pinned npm command and usable tab/copy targets', () => {
