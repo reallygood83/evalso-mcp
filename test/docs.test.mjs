@@ -7,6 +7,20 @@ const html = readFileSync(new URL('docs/index.html', root), 'utf8');
 const pkg = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'));
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json" id="structured-data">([\s\S]*?)<\/script>/)[1]);
 
+test('creator channels use the verified profiles, local logos and safe new tabs', () => {
+  const footer = html.match(/<footer[\s\S]*?<\/footer>/)[0];
+  const links = [
+    ['https://x.com/reallygood83', 'x'],
+    ['https://www.threads.com/@learning.masters', 'threads'],
+    ['https://www.youtube.com/@%EB%B0%B0%EC%9B%80%EC%9D%98%EB%8B%AC%EC%9D%B8-p5v', 'youtube'],
+  ];
+  for (const [url, logo] of links) {
+    assert.ok(footer.includes(`href="${url}" target="_blank" rel="noopener noreferrer"`));
+    assert.ok(footer.includes(`src="assets/${logo}-logo.svg"`));
+    assert.ok(existsSync(new URL(`docs/assets/${logo}-logo.svg`, root)));
+  }
+});
+
 test('installation metadata describes the visible guide and published version', () => {
   const graph = schema['@graph'];
   const page = graph.find(item => item['@type'] === 'WebPage');
